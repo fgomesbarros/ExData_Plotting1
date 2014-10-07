@@ -12,10 +12,11 @@ epc  <- read.table(file = "household_power_consumption.txt", sep = ";",
                    header = TRUE, as.is = TRUE)
 
 ## Convert Date variable to Date
-epc$Date <- as.Date(epc$Date, "%d-%m-%Y")
+#epc$Date <- as.Date(epc$Date, "%d-%m-%Y")
 
 ## Select the observations corresponding to days 2007-02-01 and 2007-02-02.
-epc <- epc[(epc$Date == "1/2/2007" | epc$Date == "2/2/2007"), ]
+epc <- epc[(epc$Date == ("1/2/2007"|"2/2/2007"), ]
 
 ## Convert Time variable to Time.
 epc$Date <- strptime(paste(epc$Date, epc$Time), format = "%d/%m/%Y %H:%M:%S")
+epc <- epc[, c(1,3:9)]
