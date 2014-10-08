@@ -20,10 +20,22 @@ epc <- epc[(epc$Date == "1/2/2007" | epc$Date == "2/2/2007"), ]
 # Merge Date and Time variable, converting to PosicIt.
 epc$Date <- strptime(paste(epc$Date, epc$Time), format = "%d/%m/%Y %H:%M:%S")
 
-# Remove Time variable. Date variable stores all the information needed.
+# Remove Time variable. Date_Time variable stores all the information needed.
 epc <- epc[, c(1,3:9)]
+names(epc)[1] <- "Date_Time"
 
 # Convert character variables to numeric.
 for(i in 2:7) {
     epc[, i] <- as.numeric(epc[, i])
 }
+
+## Creates the png file
+png(filename = "plot1.png", width = 480, height = 480, units = "px")
+
+## Plots the histogram of Global active power variable
+with(epc, hist(Global_active_power, col = "red",
+               xlab = "Global Active Power (kilowatts)", 
+               main = "Global Active Power"))
+
+## Turns off the device graphics
+dev.off()
