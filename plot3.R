@@ -1,6 +1,6 @@
 ### Data Science Specialization
 ### Exploratory Data Analisys - Course Project 1
-### plot1.R script
+### plot3.R script
 
 ## Get and Clean Data
 
@@ -30,12 +30,18 @@ for(i in 2:7) {
 }
 
 ## Create the png file
-png(filename = "plot1.png", width = 480, height = 480, units = "px")
+png(filename = "plot3.png", width = 480, height = 480, units = "px")
 
-## Plot the histogram of Global active power variable
-with(epc, hist(Global_active_power, col = "red",
-               xlab = "Global Active Power (kilowatts)", 
-               main = "Global Active Power"))
+## Plot the Sub_metering variables by Date_Time
+with(epc, {
+    plot(x = Date_Time, y = Sub_metering_1, type = "l", col = "black",
+         xlab = "", ylab = "Energy sub metering")
+    points(x = Date_Time, y = Sub_metering_2, type = "l", col = "red")
+    points(x = Date_Time, y = Sub_metering_3, type = "l", col = "blue")
+})
+
+legend("topright", lwd = 1, col = c("black", "red", "blue"),
+       legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
 
 ## Turn off the device graphics
 dev.off()
