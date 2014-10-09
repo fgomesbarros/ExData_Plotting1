@@ -17,7 +17,7 @@ epc <- read.table(file = "household_power_consumption.txt", sep = ";",
 # Select the observations corresponding to 2007-02-01 and 2007-02-02 days.
 epc <- epc[(epc$Date == "1/2/2007" | epc$Date == "2/2/2007"), ]
 
-# Merge Date and Time variable, converting to PosicIt.
+# Merge Date and Time variable, converting to POSIXlt date format.
 epc$Date <- strptime(paste(epc$Date, epc$Time), format = "%d/%m/%Y %H:%M:%S")
 
 # Remove Time variable. Date_Time variable stores all the information needed.
@@ -32,13 +32,13 @@ for(i in 2:7) {
 ## Create the png file
 png(filename = "plot4.png", width = 480, height = 480, units = "px")
 
-## Create four frames
+## Set two columns and two rows.
 par(mfrow = c(2,2))
 
 ## Plot the four graphics
 with(epc, {
     
-    # Graphic #1
+    # Graphic #1 
     plot(x = Date_Time, y = Global_active_power, type = "l",
          xlab = "", ylab = "Global Active Power")
     
